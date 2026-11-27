@@ -1,69 +1,84 @@
-# React + TypeScript + Vite
+# DevTree · Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interfaz web de DevTree, una plataforma para reunir tus redes sociales en un solo enlace público.
 
-Currently, two official plugins are available:
+API: [deploy_devtree_backend](https://github.com/rubendlpz/deploy_devtree_backend)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Funcionalidades
 
-## Expanding the ESLint configuration
+- Registro e inicio de sesión
+- Consulta de disponibilidad del nombre de usuario (*handle*)
+- Edición de handle, descripción e imagen de perfil
+- Enlaces para Facebook, GitHub, Instagram, X, YouTube, TikTok, Twitch y LinkedIn
+- Activación de enlaces y orden mediante arrastrar y soltar
+- Página pública de cada usuario en `/:handle`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tecnologías
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+React 19 · TypeScript · Vite · Tailwind CSS 4 · TanStack Query · React Router · React Hook Form · dnd-kit · Axios · Sonner
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Instalación
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Requisitos: Node.js 24 y el [backend](https://github.com/rubendlpz/deploy_devtree_backend) en ejecución.
+
+```bash
+git clone https://github.com/rubendlpz/deploy_devtree_frontend.git
+cd deploy_devtree_frontend
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Crea el archivo `.env.local`:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```env
+VITE_API_URL=http://localhost:4000
 ```
+
+Inicia el servidor de desarrollo en `http://localhost:5173`:
+
+```bash
+npm run dev
+```
+
+### Con Docker (entorno de desarrollo)
+
+```bash
+docker compose up --build
+```
+
+## Scripts
+
+| Comando | Descripción |
+|---|---|
+| `npm run dev` | Servidor de desarrollo |
+| `npm run build` | Verificación de tipos y compilación |
+| `npm run preview` | Vista previa de la compilación |
+| `npm run lint` | Análisis con ESLint |
+
+## Rutas
+
+| Ruta | Pantalla |
+|---|---|
+| `/` | Inicio y búsqueda de handle |
+| `/auth/register` | Registro |
+| `/auth/login` | Inicio de sesión |
+| `/admin` | Gestión de enlaces |
+| `/admin/profile` | Edición del perfil |
+| `/:handle` | Perfil público |
+
+## Estructura
+
+```
+src/
+├── api/          # Llamadas a la API
+├── components/   # Componentes reutilizables
+├── config/       # Cliente Axios
+├── data/         # Redes sociales disponibles
+├── layouts/      # Diseños de autenticación y administración
+├── types/        # Tipos de TypeScript
+├── utils/        # Utilidades
+└── views/        # Pantallas
+```
+
+## Autor
+
+Rubén López · [@rubendlpz](https://github.com/rubendlpz)
